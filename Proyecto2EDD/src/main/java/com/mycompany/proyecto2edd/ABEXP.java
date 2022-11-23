@@ -80,4 +80,119 @@ public class ABEXP {
         }
         return cadena;
     }
-}
+    private int prioridad(char c){
+        int p = 100;
+        switch(c){
+            case '^':
+                p = 30;
+                break;
+            case '*':
+            case '-':
+                p = 10;
+                break;
+            default:
+            p = 0;
+        }
+        return p;
+    }
+    private boolean esOperador(char c){
+        boolean resultado;
+        switch(c){
+            case'(':
+            case')':
+            case'^':
+            case'*':
+            case'/':
+            case'+':
+            case'-':
+                resultado = true;
+                break;
+            default:
+                resultado = false;
+        }
+        return resultado;
+    }
+    private NodoArbolBinario creacionABE(String cadena){
+        Pila PilaOperadores;
+        Pila PilaExpresiones;
+        NodoArbolBinario token;
+        NodoArbolBinario op1;
+        NodoArbolBinario op2;
+        NodoArbolBinario op;
+
+        PilaOperadores = new Pila();
+        PilaExpresiones = new Pila();
+        char caracterEvaluado;
+        for(int i=0; i< cadena.length(); i++){
+            caracterEvaluado = cadena.charAt(i);
+            token = new NodoArbolBinario(caracterEvaluado);
+            if(!esOperador(caracterEvaluado)){
+                PilaExpresiones.add(token);
+            }else{
+                switch(caracterEvaluado){
+                    case'(':
+                    PilaOperadores.add(token);
+                    break;
+                    case')':
+                    while(!PilaOperadores.pilaIsVacia() &&!PilaOperadores.cimaPila().dato.equals('(')){
+                        op2 = PilaExpresiones.eliminar();
+                        op1 = PilaExpresiones.eliminar();
+                        op = PilaOperadores.eliminar();
+                        op = crearArbolHijo(op2, op1, op);
+                        PilaExpresiones.add(op);
+                    }
+                    PilaOperadores.eliminar();
+                    break;
+                    default:
+                        while(!PilaOperadores.pilaIsVacia() && prioridad(caracterEvaluado) <= prioridad(PilaOperadores.cimaPila().dato.toString().charAt(0))){
+                            op2 = PilaExpresiones.eliminar();
+                            op1 = PilaExpresiones.eliminar();
+                            op = PilaExpresiones.eliminar();
+                            op = crearArbolHijo(op2, op1, op);
+                            PilaExpresiones.add(op);
+                        }
+                        PilaOperadores.add(token);
+                    }
+                }
+        }
+        while(!PilaOperadores.pilaIsVacia()){
+                    op2 = PilaExpresiones.eliminar();
+                    op1 = PilaExpresiones.eliminar();
+                    op = PilaOperadores.eliminar();
+                    op = crearArbolHijo(op2, op1, op);
+                    PilaExpresiones.add(op);
+        }
+        op = PilaExpresiones.eliminar();
+        return op;
+    }
+    public double EvaluaExpresion(){
+        return evaluacion(raiz);
+    }
+    private double evaluacion(NodoArbolBinario subArbolBinario){
+        double acum = 0;
+        if(!esOperador(subArbolBinario.dato.toString().charAt(0))){
+            return Double.parseDouble(subArbolBinario.dato.toString());
+       
+        }else{
+            switch(subArbolBinario.dato.toString().charAt(0)){
+                case '^':
+                    acum = acum + Math.pow(evaluacion(subArbolBinario.hijoIzq), evaluacion(subArbolBinario.hijoDer));
+                    break;
+                case '*':
+                    acum = acum + evaluacion(subArbolBinario.hijoIzq) * evaluacion(subArbolBinario.hijoDer);
+                    break;
+                case '/':
+                    acum = acum + evaluacion(subArbolBinario.hijoIzq) / evaluacion(subArbolBinario.hijoDer);
+                    break;
+                case '+':
+                    acum = acum + evaluacion(subArbolBinario.hijoIzq) + evaluacion(subArbolBinario.hijoDer);
+                    break;
+                case '-':
+                    acum = acum + evaluacion(subArbolBinario.hijoIzq) - evaluacion(subArbolBinario.hijoDer);
+                    break;
+            }
+        }
+        return acum;
+    }
+} // final
+
