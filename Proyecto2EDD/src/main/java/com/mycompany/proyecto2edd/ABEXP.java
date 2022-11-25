@@ -16,7 +16,8 @@ public class ABEXP {
     }
     
     public ABEXP(String ola){
-//        raiz = creacionArbolito(ola);
+        raiz = creacionABE(ola);
+        
     }
     public void vaciarArbol(){
         raiz = null;
@@ -30,23 +31,34 @@ public class ABEXP {
             NodoArbolBinario operador){
         operador.hijoIzq = izquierda;
         operador.hijoDer = derecha;
+//        JOptionPane.showMessageDialog(null, operador.hijoDer);
+//                JOptionPane.showMessageDialog(null, operador.hijoIzq);
+//                        JOptionPane.showMessageDialog(null, operador.dato);
+
+
         return operador;
     }
     public boolean arbolIsVacio(){
         return raiz == null;
     }
     
-    private String preOrden(NodoArbolBinario subArbol, String ola){
+    public String preOrden(NodoArbolBinario subArbol, String ola){
         String cadena;
+
         cadena = "";
         if(subArbol != null){
             cadena = ola + subArbol.dato.toString() + "\n" + preOrden(subArbol.hijoIzq, ola) + 
                     preOrden(subArbol.hijoDer, ola);
+//            JOptionPane.showMessageDialog(null, subArbol);
+//                        JOptionPane.showMessageDialog(null, subArbol.dato);
+//
+//                    JOptionPane.showConfirmDialog(null, "preorden" + cadena);
+
         }
         return cadena;    
     }
     
-    private String inOrden(NodoArbolBinario subArbol, String ola){
+    public String inOrden(NodoArbolBinario subArbol, String ola){
         String cadena;
         cadena = "";
         if(subArbol != null){
@@ -56,20 +68,24 @@ public class ABEXP {
         return cadena;
     }
     
-    private String postOrden(NodoArbolBinario subArbol, String ola){
+    public String postOrden(NodoArbolBinario subArbol, String ola){
         String cadena;
         cadena = "";
         if(subArbol != null){
-            cadena = ola + inOrden(subArbol.hijoIzq, ola) + inOrden(subArbol.hijoDer, ola) 
+            cadena = ola + postOrden(subArbol.hijoIzq, ola) + postOrden(subArbol.hijoDer, ola) 
                 + subArbol.dato.toString() + "\n";
         }
         return cadena;
     }
-    private String toString(int a){
+    public String toString(int a){
         String cadena= "";
         switch(a){
             case 0:
+                
                 cadena = preOrden(raiz, cadena);
+//                JOptionPane.showConfirmDialog(null, "RECIBIDO");
+//                JOptionPane.showConfirmDialog(null, cadena);
+
                 break;
             case 1:
                 cadena = inOrden(raiz, cadena);
@@ -87,6 +103,10 @@ public class ABEXP {
                 p = 30;
                 break;
             case '*':
+            case '/':
+                p=20;
+                break;
+            case '+':
             case '-':
                 p = 10;
                 break;
@@ -112,7 +132,7 @@ public class ABEXP {
         }
         return resultado;
     }
-    private NodoArbolBinario creacionABE(String cadena){
+    public NodoArbolBinario creacionABE(String cadena){
         Pila PilaOperadores;
         Pila PilaExpresiones;
         NodoArbolBinario token;
@@ -127,27 +147,28 @@ public class ABEXP {
             caracterEvaluado = cadena.charAt(i);
             token = new NodoArbolBinario(caracterEvaluado);
             if(!esOperador(caracterEvaluado)){
+                JOptionPane.showMessageDialog(null, token.dato);
                 PilaExpresiones.add(token);
             }else{
                 switch(caracterEvaluado){
                     case'(':
-                    PilaOperadores.add(token);
-                    break;
+                        PilaOperadores.add(token);
+                        break;
                     case')':
-                    while(!PilaOperadores.pilaIsVacia() &&!PilaOperadores.cimaPila().dato.equals('(')){
-                        op2 = PilaExpresiones.eliminar();
-                        op1 = PilaExpresiones.eliminar();
-                        op = PilaOperadores.eliminar();
-                        op = crearArbolHijo(op2, op1, op);
-                        PilaExpresiones.add(op);
-                    }
-                    PilaOperadores.eliminar();
-                    break;
+                        while(!PilaOperadores.pilaIsVacia() &&!PilaOperadores.cimaPila().dato.equals('(')){
+                            op2 = PilaExpresiones.eliminar();
+                            op1 = PilaExpresiones.eliminar();
+                            op = PilaOperadores.eliminar();
+                            op = crearArbolHijo(op2, op1, op);
+                            PilaExpresiones.add(op);
+                        }
+                        PilaOperadores.eliminar();
+                        break;
                     default:
                         while(!PilaOperadores.pilaIsVacia() && prioridad(caracterEvaluado) <= prioridad(PilaOperadores.cimaPila().dato.toString().charAt(0))){
                             op2 = PilaExpresiones.eliminar();
                             op1 = PilaExpresiones.eliminar();
-                            op = PilaExpresiones.eliminar();
+                            op = PilaOperadores.eliminar();
                             op = crearArbolHijo(op2, op1, op);
                             PilaExpresiones.add(op);
                         }
