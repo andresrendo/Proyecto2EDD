@@ -4,12 +4,14 @@
  */
 package com.mycompany.proyecto2edd;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author mannith
  */
 public class ABEXP {
-    NodoArbolBinario raiz;
+    public NodoArbolBinario raiz;
     
     public ABEXP(){
         raiz = null;
@@ -47,8 +49,7 @@ public class ABEXP {
 
         cadena = "";
         if(subArbol != null){
-            cadena = ola + subArbol.dato.toString() + "\n" + preOrden(subArbol.hijoIzq, ola) + 
-                    preOrden(subArbol.hijoDer, ola);
+            cadena = ola + " "+ subArbol.dato.toString() + " "+ "\n" + preOrden(subArbol.hijoIzq, ola) +" "+ preOrden(subArbol.hijoDer, ola);
 //            JOptionPane.showMessageDialog(null, subArbol);
 //                        JOptionPane.showMessageDialog(null, subArbol.dato);
 //
@@ -62,8 +63,7 @@ public class ABEXP {
         String cadena;
         cadena = "";
         if(subArbol != null){
-            cadena = ola + inOrden(subArbol.hijoIzq, ola) + subArbol.dato.toString() + "\n" + 
-                inOrden(subArbol.hijoDer, ola);
+            cadena = ola + " "+inOrden(subArbol.hijoIzq, ola) + " "+ subArbol.dato.toString() + " "+"\n" + inOrden(subArbol.hijoDer, ola);
         }
         return cadena;
     }
@@ -72,8 +72,7 @@ public class ABEXP {
         String cadena;
         cadena = "";
         if(subArbol != null){
-            cadena = ola + postOrden(subArbol.hijoIzq, ola) + postOrden(subArbol.hijoDer, ola) 
-                + subArbol.dato.toString() + "\n";
+            cadena = ola + " "+ postOrden(subArbol.hijoIzq, ola) + " "+ postOrden(subArbol.hijoDer, ola) + " "+ subArbol.dato.toString() + "\n";
         }
         return cadena;
     }
@@ -94,6 +93,7 @@ public class ABEXP {
                 cadena = postOrden(raiz, cadena);
                 break;
         }
+        cadena = cadena.replace("\n", "");
         return cadena;
     }
     private int prioridad(char c){
@@ -103,15 +103,18 @@ public class ABEXP {
                 p = 30;
                 break;
             case '*':
+                p=20;
+                break;
             case '/':
                 p=20;
                 break;
             case '+':
+                p = 10;
             case '-':
                 p = 10;
                 break;
             default:
-            p = 0;
+                p = 0;
         }
         return p;
     }
@@ -147,7 +150,7 @@ public class ABEXP {
             caracterEvaluado = cadena.charAt(i);
             token = new NodoArbolBinario(caracterEvaluado);
             if(!esOperador(caracterEvaluado)){
-                JOptionPane.showMessageDialog(null, token.dato);
+//                JOptionPane.showMessageDialog(null, token.dato);
                 PilaExpresiones.add(token);
             }else{
                 switch(caracterEvaluado){
@@ -215,5 +218,8 @@ public class ABEXP {
         }
         return acum;
     }
-} // final
+    
+    
+    
 
+} // final
