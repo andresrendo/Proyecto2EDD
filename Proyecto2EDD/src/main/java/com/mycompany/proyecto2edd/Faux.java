@@ -43,6 +43,8 @@ public class Faux {
         }catch( Exception ex){
             JOptionPane.showMessageDialog(null, ex);
         }
+        datos = datos.replace("\n", "");
+        datos = datos.replace(" ", "");
         return datos;
     }
 }
