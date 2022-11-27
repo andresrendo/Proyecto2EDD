@@ -9,9 +9,9 @@ package com.mycompany.proyecto2edd;
  * @author mannith
  */
 public class NodoArbolBinario {
-    Object dato;
-    NodoArbolBinario hijoIzq;
-    NodoArbolBinario hijoDer;
+    public Object dato;
+    public NodoArbolBinario hijoIzq;
+    public NodoArbolBinario hijoDer;
     
     public NodoArbolBinario(Object elemento){
         dato = elemento;
