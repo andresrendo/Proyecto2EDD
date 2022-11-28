@@ -49,7 +49,7 @@ public class ABEXP {
 
         cadena = "";
         if(subArbol != null){
-            cadena = ola + " "+ subArbol.dato.toString() + " "+ "\n" + preOrden(subArbol.hijoIzq, ola) +" "+ preOrden(subArbol.hijoDer, ola);
+            cadena = ola + " "+ subArbol.dato.toString() + " "+ "\n" + preOrden(subArbol.hijoDer, ola) +" "+ preOrden(subArbol.hijoIzq, ola);
 //            JOptionPane.showMessageDialog(null, subArbol);
 //                        JOptionPane.showMessageDialog(null, subArbol.dato);
 //
@@ -63,7 +63,7 @@ public class ABEXP {
         String cadena;
         cadena = "";
         if(subArbol != null){
-            cadena = ola + " "+inOrden(subArbol.hijoIzq, ola) + " "+ subArbol.dato.toString() + " "+"\n" + inOrden(subArbol.hijoDer, ola);
+            cadena = ola + " "+inOrden(subArbol.hijoDer, ola) + " "+ subArbol.dato.toString() + " "+"\n" + inOrden(subArbol.hijoIzq, ola);
         }
         return cadena;
     }
@@ -72,7 +72,7 @@ public class ABEXP {
         String cadena;
         cadena = "";
         if(subArbol != null){
-            cadena = ola + " "+ postOrden(subArbol.hijoIzq, ola) + " "+ postOrden(subArbol.hijoDer, ola) + " "+ subArbol.dato.toString() + "\n";
+            cadena = ola + " "+ postOrden(subArbol.hijoDer, ola) + " "+ postOrden(subArbol.hijoIzq, ola) + " "+ subArbol.dato.toString() + "\n";
         }
         return cadena;
     }
