@@ -128,10 +128,14 @@ public class Interfaz extends javax.swing.JFrame {
         SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run(){
-                ArbolGrafico v2 = new ArbolGrafico(araiz);
-                JFrame frame = v2;
-                frame.setSize(488,488);
-                frame.setVisible(true);
+                try{
+                    ArbolGrafico v2 = new ArbolGrafico(araiz);
+                    JFrame frame = v2;
+                    frame.setSize(488,488);
+                    frame.setVisible(true);
+                }catch(Exception e){
+                    
+                }
             }
           
           });// TODO add your handling code here:

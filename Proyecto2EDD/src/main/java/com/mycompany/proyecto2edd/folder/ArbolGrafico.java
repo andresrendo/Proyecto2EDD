@@ -27,30 +27,39 @@ public class ArbolGrafico extends javax.swing.JFrame {
     }
     
     public int dibujar(Graphics g, NodoArbolBinario x, int x0, int x1, int y){
-        int m = (x0 + x1)/2;
-        g.setColor(Color.orange);
-        g.fillOval(m, y, 50, 40);
-        g.setColor(Color.lightGray);
-        g.setFont(new Font("Calibri", Font.BOLD, 22));
-        String t = String.valueOf(x.dato);
-        g.drawString(t, m+20, y+30);
-        if(x.hijoDer != null){
-            int x2 = dibujar(g, x.hijoDer, x0, m, y+50);
-            g.drawLine(m+25, y+40, x2+25, y+50);
-        }
-        if(x.hijoIzq != null){
-            int x2 = dibujar(g, x.hijoIzq, m, x1, y+50);
-            g.drawLine(m+25, y+40, x2+25, y+50);
-        }
-        return m;
+//        try{
+            int m = (x0 + x1)/2;
+            g.setColor(Color.orange);
+            g.fillOval(m, y, 50, 40);
+            g.setColor(Color.lightGray);
+            g.setFont(new Font("Calibri", Font.BOLD, 22));
+            String t = String.valueOf(x.dato);
+            g.drawString(t, m+20, y+30);
+            if(x.hijoDer != null){
+                int x2 = dibujar(g, x.hijoDer, x0, m, y+50);
+                g.drawLine(m+25, y+40, x2+25, y+50);
+            }
+            if(x.hijoIzq != null){
+                int x2 = dibujar(g, x.hijoIzq, m, x1, y+50);
+                g.drawLine(m+25, y+40, x2+25, y+50);
+            }
+            return m;
+//        }catch(Exception e){
+//            return null;
+//        }
     }
     
     @Override
     public void paint(Graphics g){
         super.paint(g);
-        dibujar(g, v1, 0, this.getWidth()-25, 100 );
+        try{
+            dibujar(g, v1, 0, this.getWidth()-25, 100 );
+    
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Ingrese un arbol correctamente");
+        }
+        
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
