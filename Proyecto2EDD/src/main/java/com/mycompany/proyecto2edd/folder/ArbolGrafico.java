@@ -27,7 +27,7 @@ public class ArbolGrafico extends javax.swing.JFrame {
     
     public int dibujar(Graphics g, NodoArbolBinario x, int x0, int x1, int y){
         int m = (x0 + x1)/2;
-        g.setColor(Color.green);
+        g.setColor(Color.orange);
         g.fillOval(m, y, 50, 40);
         g.setColor(Color.lightGray);
         g.setFont(new Font("Calibri", Font.BOLD, 22));
