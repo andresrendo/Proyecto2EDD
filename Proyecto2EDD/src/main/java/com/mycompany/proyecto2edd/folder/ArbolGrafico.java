@@ -20,8 +20,9 @@ public class ArbolGrafico extends javax.swing.JFrame {
      * Creates new form ArbolGrafico
      * @param v1
      */
-    public ArbolGrafico(NodoArbolBinario x) {
+   public ArbolGrafico(NodoArbolBinario x) {
         v1 = x;
+        
         initComponents();
     }
     
@@ -33,12 +34,12 @@ public class ArbolGrafico extends javax.swing.JFrame {
         g.setFont(new Font("Calibri", Font.BOLD, 22));
         String t = String.valueOf(x.dato);
         g.drawString(t, m+20, y+30);
-        if(x.hijoIzq != null){
-            int x2 = dibujar(g, x.hijoIzq, x0, m, y+50);
+        if(x.hijoDer != null){
+            int x2 = dibujar(g, x.hijoDer, x0, m, y+50);
             g.drawLine(m+25, y+40, x2+25, y+50);
         }
-        if(x.hijoDer != null){
-            int x2 = dibujar(g, x.hijoDer, m, x1, y+50);
+        if(x.hijoIzq != null){
+            int x2 = dibujar(g, x.hijoIzq, m, x1, y+50);
             g.drawLine(m+25, y+40, x2+25, y+50);
         }
         return m;
@@ -113,4 +114,5 @@ public class ArbolGrafico extends javax.swing.JFrame {
     // Variables declaration - do not modify                     
     // End of variables declaration                   
 }
+
 
