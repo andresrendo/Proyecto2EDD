@@ -45,8 +45,6 @@ public class Interfaz extends javax.swing.JFrame {
         resultado = new javax.swing.JTextArea();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -69,6 +67,7 @@ public class Interfaz extends javax.swing.JFrame {
 
         resultado.setBackground(new java.awt.Color(153, 255, 102));
         resultado.setColumns(20);
+        resultado.setFont(new java.awt.Font("Dyuthi", 0, 20)); // NOI18N
         resultado.setRows(5);
         jScrollPane1.setViewportView(resultado);
 
@@ -91,12 +90,6 @@ public class Interfaz extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 200, -1, -1));
-
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/arbol2.jpg"))); // NOI18N
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, 260, 280));
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/signos.jpg"))); // NOI18N
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, -1, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 430));
 
@@ -125,7 +118,7 @@ public class Interfaz extends javax.swing.JFrame {
         araiz = abe.raiz;
 //        abe.creacionABE(datosArbol);
         JOptionPane.showMessageDialog(null, datosArbol);
-        String res = "PreOrden: " + abe.toString(0) +"\n"+ "Inorden: " + abe.toString(1) +"\n"+ "PostOrden: " + abe.toString(2);
+        String res = "Polaca: " + abe.toString(0) +"\n"+ "Infija: " + abe.toString(1) +"\n"+ "Polaca inversa: " + abe.toString(2);
         resultado.setText(res);
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -184,8 +177,6 @@ public class Interfaz extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea resultado;
