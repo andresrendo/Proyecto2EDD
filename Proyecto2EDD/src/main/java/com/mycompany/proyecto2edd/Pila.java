@@ -42,4 +42,13 @@ public class Pila {
         }
         return aux;
     }
+        public int tamaño(){
+        int t = 1;
+        NodoPila aux = cima;
+        while(aux.siguiente!= null){
+            t++;
+            aux = aux.siguiente;
+        }
+        return t;
+    }
 }
